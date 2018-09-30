@@ -1,7 +1,10 @@
 import requests
+from parsers import vargas_parser
 from bs4 import BeautifulSoup
+import threading
 
-def spider(max_pages):
+max_pages = 1
+def getPage():
     page = 1
     while page <= max_pages:
         if(page == 1):
@@ -9,21 +12,15 @@ def spider(max_pages):
         else:
             url_suffix = '("pagina" +str(page))'
         url = 'https://www.infocasas.com.uy/venta/inmuebles/montevideo/' + url_suffix
+        print('Getting: ' + url)
         source_code = requests.get(url)
         plain_txt = source_code.text
         soup = BeautifulSoup(plain_txt)
-        parser(soup)
+        vargas_parser.parse(soup)
         page += 1
 
+def main():
+    threading.Thread(target=getPage).start()
 
-def parser(soup):
-    for paragraph in soup.findAll('p', {'class':'titulo'}):
-        name = paragraph.text
-        link = soup.find('a', {'title': name})
-        if(link is not None):
-            href = "https://www.infocasas.com.uy" + link.get('href')
-            print(href)
-            print(name)
-
-
-spider(1)
+if __name__ == '__main__':
+    main()
