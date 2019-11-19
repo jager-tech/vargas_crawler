@@ -1,39 +1,35 @@
-import requests
-from parsers import infocasas_parser
-from bs4 import BeautifulSoup
 import threading
+import requests
+from bs4 import BeautifulSoup
 
-max_pages = 1
+from src.parsers import parser
+
+max_pages = 10
 properties = []
 remainingPages = True
 
 
 def getPage(page):
-    if(page == 1):
-        url_suffix = '?&ordenListado=3'
-    else:
-        url_suffix = '("pagina" +str(page))?&ordenListado=3'
-    url = 'https://www.infocasas.com.uy/alquiler/inmuebles/montevideo/' + \
-        url_suffix
+    url = f'http://www.vargasinmobiliaria.com.uy/propiedades/Alquiler/U$S/Sin_precio_m%C3%ADnimo/Sin_precio_m%C3%A1ximo/Todos_los_tipos/Todas_las_zonas/P%C3%A1gina-{page}'
     print('Getting page: ' + str(page))
     response = requests.get(url)
-    if (response.status_code < 400):
+    if response.status_code < 400:
         plain_txt = response.text
         soup = BeautifulSoup(plain_txt, features="html.parser")
-        properties.extend(infocasas_parser.parse(soup))
+        properties.extend(parser.parse(soup))
     else:
-        remainingPages = False
         print("Got to the end")
 
 
 def main():
     page = 1
-    print('Getting {} pages from InfoCasas'.format(str(max_pages)))
+    print(f'Getting {max_pages} pages from Vargas')
     while (page <= max_pages and remainingPages):
         threading.Thread(target=getPage(page)).start()
         page += 1
-    print('Se obtuvieron {} propiedades'.format(len(properties)))
-
+    print(f'Se obtuvieron {len(properties)} propiedades')
+    for property in properties:
+        print(property.price)
 
 if __name__ == '__main__':
     main()
