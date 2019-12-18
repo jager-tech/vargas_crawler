@@ -11,10 +11,10 @@ with open('requirements-dev.txt') as file:
 NAMESPACE_PACKAGES = ['jager']
 
 setup(
-    name='jager.vargas_crawler',
+    name='vargas_crawler',
     version='0.0.1',
     packages=find_packages('src', exclude=['*_test.py']),
     package_dir={'': 'src'},
-    namespace_packages=['jager_crawler'],
+    namespace_packages=['vargas_crawler'],
     install_requires=required_modules,
     extras_require={'dev': development_modules})
