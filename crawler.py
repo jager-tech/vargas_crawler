@@ -30,7 +30,7 @@ def getPage(page):
 
 def store_data(properties):
     properties_df = pd.DataFrame(properties)
-    s3_client = boto3.client('s3', aws_access_key_id='AKIATJRLJTQ2EUZWKMDR', aws_secret_access_key='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')
+    s3_client = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='')
     full_prefix = get_s3_full_file_path()
     copy_to_s3(s3_client, properties_df, BUCKET, f'{full_prefix}/vargas_data.csv')
     store_complete(s3_client, BUCKET, full_prefix)
