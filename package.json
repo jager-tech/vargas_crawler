@@ -1,7 +1,7 @@
 {
   "name": "vargas_crawler",
   "version": "1.0.0",
-  "repository": "https://github.com/jager-tech/vargas-crawler.git",
+  "repository": "https://github.com/jager-tech/vargas_crawler.git",
   "author": "Ignacio Vargas",
   "license": "MIT",
   "scripts": {

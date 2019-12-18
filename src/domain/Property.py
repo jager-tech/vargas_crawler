@@ -1,20 +1,34 @@
 class Property(object):
-    def __init__(self, name, price, zone, type, images, reference):
-        self.name = name
+    def __init__(self, title, description, price, zone, types, images, reference, link):
+        self.title = title
+        self.description = description
         self.price = price
         self.zone = zone
-        self.type = type
+        self.types = types
         self.images = images
         self.reference = reference
+        self.link = link
 
     def __str__(self):
-        rep = "Property:\n"
-        rep += "name: " + self.name.encode('utf-8').strip() + "\n"
-        rep += "price: " + self.price.encode('utf-8').strip() + "\n"
-        rep += "zone: " + self.zone.encode('utf-8').strip() + "\n"
-        rep += "type: " + str(self.type).encode('utf-8').strip() + "\n"
-        rep += "images: " + \
-            (', '.join([str(image).encode('utf-8') for image in self.images]))\
-            + "\n"
-        rep += "reference: " + self.reference.encode('utf-8').strip() + "\n"
-        return rep
+        prop = '"'
+        prop += self.title.strip()
+        prop += '","'
+        prop += self.description.strip()
+        prop += '","'
+        prop += self.price.strip()
+        prop += '","'
+        prop += self.zone.strip()
+        prop += '","'
+        prop += str(self.type)
+        prop += '","'
+        prop += self.reference.strip()
+        prop += '","'
+        prop += self.link.strip()
+        prop += '","'
+        prop += '"['
+        for image in self.images:
+            prop += image
+            prop += ','
+        prop += ']"'
+        prop += '\n'
+        return prop
