@@ -13,6 +13,8 @@ NAMESPACE_PACKAGES = ['jager']
 setup(
     name='vargas_crawler',
     version='0.0.1',
+    author='Ignacio Vargas',
+    author_email='ivargas@jager.com',
     packages=find_packages('src', exclude=['*_test.py']),
     package_dir={'': 'src'},
     namespace_packages=['vargas_crawler'],
