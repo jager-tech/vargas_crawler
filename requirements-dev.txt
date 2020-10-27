@@ -4,7 +4,7 @@ bs4==0.0.1
 certifi==2019.11.28
 cffi==1.10.0
 chardet==3.0.4
-cryptography==1.8.1
+cryptography==3.2
 idna==2.6
 packaging==16.8
 pycparser==2.18
